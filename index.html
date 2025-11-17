@@ -1,128 +1,1117 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Document Object Model:30 Days Of JavaScript</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300, 400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeTez - Professional Web Design Services</title>
+    <meta name="description" content="Get your business website in 48 hours starting at ₹4999. Professional web design services for small businesses across India.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #00e676;
+            --dark-green: #1de9b6;
+            --highlight-yellow: #ffeb3b;
+            --dark-text: #000;
+            --light-gray: #f9f9f9;
+            --border-radius: 1.5rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: #000;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            margin: 1rem auto;
+            max-width: 1200px;
+        }
+
+        nav .logo {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-green);
+        }
+
+        nav .phone {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            background: #000;
+            padding: 1rem;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-top: -1rem;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav ul {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            padding: 4rem 2rem;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '⚡';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 4rem;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '*';
+            position: absolute;
+            bottom: 30%;
+            right: 15%;
+            font-size: 3rem;
+            color: #ff5252;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content h1 {
+            font-size: clamp(1.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .hero-content .badge {
+            display: inline-block;
+            background: #fff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .price-highlight {
+            background: var(--highlight-yellow);
+            padding: 0.5rem 2rem;
+            border-radius: 2rem;
+            display: inline-block;
+            font-weight: 900;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 0 0.5rem;
+            color: #000;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--dark-text);
+        }
+
+        .call-button {
+            background: #000;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .call-button:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stars {
+            color: #ffb300;
+            font-size: 1.2rem;
+        }
+
+        /* Quote Form */
+        .quote-form {
+            background: #fff;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .quote-form-icon {
+            position: absolute;
+            top: -2rem;
+            right: 2rem;
+            font-size: 3rem;
+        }
+
+        .quote-form h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+        }
+
+        .quote-form p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group label .required {
+            color: #ff5252;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-green);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 230, 118, 0.25);
+        }
+
+        .submit-btn {
+            background: #66bb6a;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #558b2f;
+            transform: translateY(-2px);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: #fff;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .services-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .services-header p {
+            font-size: 1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-green);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 6rem 2rem;
+            background: var(--light-gray);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .pricing-header p {
+            font-size: 1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card.featured {
+            border: 3px solid var(--primary-green);
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            transform: scale(1);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-old-price {
+            font-size: 1rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-green);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓ ';
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .pricing-button {
+            width: 100%;
+            padding: 1rem;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .pricing-button:hover {
+            background: #333;
+        }
+
+        .pricing-card.featured .pricing-button {
+            background: var(--primary-green);
+            color: #000;
+        }
+
+        .pricing-card.featured .pricing-button:hover {
+            background: #00c853;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 2rem;
+            background: #fff;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .faq-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .faq-header p {
+            font-size: 1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            border: none;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .accordion-button {
+            background: #fff;
+            color: var(--dark-text);
+            font-weight: 600;
+            padding: 1.5rem;
+            border: none;
+            box-shadow: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--primary-green);
+            color: #000;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: var(--primary-green);
+        }
+
+        .accordion-body {
+            padding: 1.5rem;
+            color: #666;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: var(--light-gray);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+
+        .contact-header p {
+            font-size: 1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-green);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+        }
+
+        .contact-details p {
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Bootstrap responsive adjustments */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: row;
+                gap: 1rem;
+                margin: 1rem;
+                position: relative;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 2rem 1rem;
+                min-height: auto;
+            }
+
+            .quote-form-icon {
+                display: none;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.75rem;
+            }
+
+            .price-highlight {
+                font-size: 1.25rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            nav .logo {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                font-size: 0.85rem;
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-    <div class="wrapper">
-        <h1>Asabeneh Yetayeh challenges in <span>2020</span></h1>
-        <h2>30DaysOfJavaScript Challenge</h2>
-        <p></p>
-        <ul>
-            <li>30DaysOfPython Challenge Done</li>
-            <li>30DaysOfJavaScript Challenge Ongoing</li>
-            <li>30DaysOfReact Challenge Coming</li>
-            <li>30DaysOfReactNative Challenge Coming</li>
-            <li>30DaysOfFullStack Challenge Coming</li>
-            <li>30DaysOfDataAnalysis Challenge Coming</li>
-            <li>30DaysOfMachineLearning Challenge Coming</li>
-        </ul>
+    <div class="container-fluid px-0">
+        <nav class="d-flex justify-content-between align-items-center">
+            <div class="logo">GR Network</div>
+            <ul class="mb-0 d-none d-md-flex">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn d-md-none">☰</button>
+            <div class="phone">📱 <span class="d-none d-sm-inline">+91 9345420671</span></div>
+        </nav>
+        <div class="mobile-nav" id="mobileNav">
+            <ul class="d-flex flex-column">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </div>
 
+    <section class="hero">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6 col-12">
+                    <div class="hero-content">
+                        <div class="badge">✨ SPECIAL OFFER ✨</div>
+                        <h1>Get Your Business Website in 48 Hours – Starting at <span class="price-highlight">₹4999</span></h1>
+                        <p>Need a professional website? CodeTez delivers fast, affordable solutions for small businesses across India.</p>
+                        <button class="call-button">☎️ Call: +91 9345420671</button>
+                        <div class="rating">
+                            <div>🔗 Google Reviews</div>
+                            <div class="stars">★★★★★</div>
+                            <div><strong>(5.0)</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-12">
+                    <div class="quote-form">
+                        <div class="quote-form-icon">👆</div>
+                        <h3>Get a Quote</h3>
+                        <p>Development Comprehensive solutions</p>
+                        <form id="quoteForm">
+                            <div class="form-group">
+                                <label for="name"><span class="required">*</span> Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><span class="required">*</span> Email</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone"><span class="required">*</span> Phone</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company" class="form-control">
+                            </div>
+                            <button type="submit" class="submit-btn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header">
+                <h2>Our Web Design Services</h2>
+                <p>We offer comprehensive web solutions tailored to your business needs</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="service-card">
+                        <div class="service-icon">💼</div>
+                        <h3>Business Websites</h3>
+                        <p>Professional websites designed to showcase your business and attract customers with clean, responsive designs.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="service-card">
+                        <div class="service-icon">🛒</div>
+                        <h3>E-Commerce Solutions</h3>
+                        <p>Complete online store setup with payment integration, product management, and secure checkout.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="service-card">
+                        <div class="service-icon">📱</div>
+                        <h3>Mobile-First Design</h3>
+                        <p>Websites optimized for mobile devices to ensure great user experience across all screen sizes.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="service-card">
+                        <div class="service-icon">🔍</div>
+                        <h3>SEO Optimization</h3>
+                        <p>Improve your search engine rankings with our SEO-friendly website structures and optimization techniques.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3>Fast Loading</h3>
+                        <p>Optimized code and assets to ensure your website loads quickly, improving user experience and SEO.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="service-card">
+                        <div class="service-icon">🔄</div>
+                        <h3>Maintenance & Support</h3>
+                        <p>Ongoing website maintenance, updates, and technical support to keep your site running smoothly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Business Website Designing Price</h2>
+                <p>We at CodeTez Technologies design and develop affordable business website. Check our multiple plans and features your will get.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="pricing-card">
+                        <div class="pricing-icon">💼</div>
+                        <h3 class="pricing-title">Basic Plan</h3>
+                        <div class="pricing-price">₹4999</div>
+                        <div class="pricing-old-price">₹13000</div>
+                        <p class="pricing-description">For your Business</p>
+                        <ul class="pricing-features">
+                            <li>5 Page (Dynamic Website)</li>
+                            <li>Business Email ID</li>
+                            <li>100% Responsive Website</li>
+                            <li>Live Chat Integration</li>
+                            <li>Google Analytics Integration</li>
+                            <li>We Support (Phone/Email/Chat)</li>
+                            <li>Annual Renewal ₹3500</li>
+                        </ul>
+                        <button class="pricing-button" onclick="bookNow('Basic')">Book Now</button>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="pricing-card featured">
+                        <div class="pricing-icon">⭐</div>
+                        <h3 class="pricing-title">Classic Plan</h3>
+                        <div class="pricing-price">₹9500</div>
+                        <div class="pricing-old-price">₹18000</div>
+                        <p class="pricing-description">For your Business</p>
+                        <ul class="pricing-features">
+                            <li>UL Pages* (Dynamic Website)</li>
+                            <li>Business Email ID</li>
+                            <li>100% Responsive Website</li>
+                            <li>Live Chat Integration</li>
+                            <li>Google Analytics Integration</li>
+                            <li>We Support (Phone/Email/Chat)</li>
+                            <li>Annual Renewal ₹4000</li>
+                        </ul>
+                        <button class="pricing-button" onclick="bookNow('Classic')">Book Now</button>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="pricing-card">
+                        <div class="pricing-icon">👑</div>
+                        <h3 class="pricing-title">Premium Plan</h3>
+                        <div class="pricing-price">₹14500</div>
+                        <div class="pricing-old-price">₹25000</div>
+                        <p class="pricing-description">For your Business</p>
+                        <ul class="pricing-features">
+                            <li>1 Free .in Domain Name</li>
+                            <li>Premium Themes</li>
+                            <li>UL Pages* (Dynamic Website)</li>
+                            <li>Business Email ID</li>
+                            <li>Google My Business Setup</li>
+                            <li>100% Responsive Website</li>
+                            <li>Live Chat Integration</li>
+                            <li>Google Analytics Integration</li>
+                            <li>We Support (Phone/Email/Chat)</li>
+                            <li>Annual Renewal ₹4500</li>
+                        </ul>
+                        <button class="pricing-button" onclick="bookNow('Premium')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our web design services</p>
+            </div>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            How long does it take to build a website?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We typically deliver basic business websites within 48 hours. More complex projects may take 3-5 business days depending on requirements.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Do you provide hosting and domain services?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, we provide hosting services and can help you register a domain name. Our Premium plan includes a free .in domain for the first year.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Can I update my website content myself?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, all our websites come with a user-friendly content management system that allows you to easily update text, images, and other content without technical knowledge.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            What is included in the annual renewal fee?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            The annual renewal covers hosting, domain renewal (if applicable), security updates, technical support, and minor content updates.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            Do you offer e-commerce functionality?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, we can build e-commerce websites with product catalogs, shopping carts, and payment gateway integration. Contact us for custom e-commerce pricing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for any questions or to start your project</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6 col-12">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h3>Phone</h3>
+                                <p>+91 9345420671</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>info@grnetwork.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h3>Coimbatore</h3>
+                                <p>India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-details">
+                                <h3>Business Hours</h3>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="quote-form">
+                        <h3>Send Us a Message</h3>
+                        <p>Fill out the form below and we'll get back to you soon</p>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="contactName"><span class="required">*</span> Name</label>
+                                <input type="text" id="contactName" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail"><span class="required">*</span> Email</label>
+                                <input type="email" id="contactEmail" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactPhone"><span class="required">*</span> Phone</label>
+                                <input type="tel" id="contactPhone" name="phone" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Gr Network</div>
+            <div class="footer-links">
+                <a href="#services">Services</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 GR Network. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const hexaColor = () => {
-            const str = '0123456789abcdef'
-            let hexa = '#'
-            let index
-            for (let i = 0; i < 6; i++) {
-                index = Math.floor(Math.random() * str.length)
-                hexa += str[index]
-            }
-            return hexa
+        const WHATSAPP_NUMBER = '919345420671'; // India code + new number
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        });
+
+        // Form submission
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            alert(`Thank you ${name}! We'll contact you soon on ${email}`);
+            this.reset();
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            
+            alert(`Thank you ${name}! We'll get back to you soon.`);
+            this.reset();
+        });
+
+        // Book Now function - MODIFIED FOR WHATSAPP REDIRECT
+        function bookNow(plan) {
+            const message = encodeURIComponent(`Hello GR Team, I a m interested in the ${plan} plan. Please send me more details!`);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
         }
 
-        const showDateTime = () => {
-            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-                'October', 'November', 'December'
-            ]
-            const now = new Date()
-            const year = now.getFullYear()
-            const month = months[now.getMonth()]
-            const date = now.getDate()
-            let hours = now.getHours()
-            let minutes = now.getMinutes()
-            let seconds = now.getSeconds()
-            if (hours < 10) {
-                hours = '0' + hours
-            }
-            if (minutes < 10) {
-                minutes = '0' + minutes
-            }
-            if (seconds < 10) {
-                seconds = '0' + seconds
-            }
+        // Call button - MODIFIED TO NEW NUMBER
+        document.querySelector('.call-button').addEventListener('click', function() {
+            window.location.href = 'tel:+919345420671';
+        });
 
-            const dateMonthYear = `${month} ${date}, ${year}`
-
-            const time = hours + ':' + minutes
-            const fullTime = dateMonthYear + ' ' + time
-            return fullTime + `:${seconds}`
-        }
-
-        const wrapper = document.querySelector('.wrapper')
-        const year = document.querySelector('span')
-        const time = document.querySelector('p')
-        wrapper.style.width = '50%'
-        wrapper.style.margin = 'auto'
-        const title = document.querySelector('h1')
-        const subTitle = document.querySelector('h2')
-        title.style.textAlign = 'center'
-        title.style.fontFamily = 'Montserrat'
-        title.style.fontWeight = 500
-
-        subTitle.style.textAlign = 'center'
-        subTitle.style.fontFamily = 'Montserrat'
-        subTitle.style.fontWeight = 300
-        subTitle.style.textDecoration = 'underline'
-
-
-        time.style.textAlign = 'center'
-        time.style.fontFamily = 'Montserrat'
-        time.style.fontWeight = 400
-
-        setInterval(() => {
-            year.style.color = hexaColor()
-            year.style.fontSize = '96px'
-            year.style.fontWeight = 700;
-            time.textContent = showDateTime()
-            time.style.background = hexaColor()
-            time.style.width = "25%"
-            time.style.margin = 'auto'
-            time.style.padding = '10px'
-
-        }, 1000)
-
-
-
-        const ul = document.querySelector('ul')
-        const lists = document.querySelectorAll('li')
-        for (const list of lists) {
-            list.style.listStyle = 'none'
-            list.style.padding = '25px'
-            list.style.margin = '3px'
-            list.style.fontFamily = 'Montserrat'
-            list.style.fontWeight = 300;
-            list.style.letterSpacing = '0.0625em'
-
-            if (list.textContent.includes('Done')) {
-                list.style.background = '#21bf73'
-            } else if (list.textContent.includes('Ongoing')) {
-                list.style.background = '#fddb3a'
-
-
-
-            } else {
-                list.style.background = '#fd5e53'
-
-            }
-
-        }
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobileNav').classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
-
 </html>
